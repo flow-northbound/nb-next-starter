@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⤧ Northbound • next.js starter
 
-## Getting Started
+> **NB** is a simple template built with next.js and other modern technologies. it's designed for developers who want a fast, modern, and scalable foundation without reinventing the backend.
 
-First, run the development server:
+## stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. 🧱 **core**: [nextjs 15.3](https://nextjs.org) + [react 19.1](https://react.dev) + [ts 5.8](https://typescriptlang.org)
+2. 🎨 **ui**: [tailwind 4.1](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+3. 🔒 **auth**: [better-auth](https://better-auth.com)
+4. 🎬 **anims**: N/A
+5. 📦 **storage**: N/A
+6. 📊 **analytics**: [vercel](https://vercel.com/docs/analytics)
+7. 🧬 **db**: [drizzle-orm](https://orm.drizzle.team) ([pg](https://neon.tech/postgresql/tutorial)) + [neon](https://neon.tech)/(🤔🔜)[supabase](https://supabase.com)
+8. 🏗️ **dx**: [eslint](https://eslint.org) + [biome](https://biomejs.dev) + [knip](https://knip.dev)
+9. 📝 **forms**: N/A
+10. 📅 **tables**: N/A
+11. 🌐 **i18n**: N/A
+12. 💌 **email**: N/A
+13. 💳 **payments**: N/A
+
+## quick start
+
+1. install [git](https://git-scm.com), [node.js](https://nodejs.org), [corepack](https://github.com/nodejs/corepack)
+2. Create a next app:
+
+```
+npx create-next-app@latest --example "https://github.com/flow-northbound/nb-next-starter" [my-app-name]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Change directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```cd [my-app-name]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+4. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+corepack enable pnpm
+corepack use pnpm@latest
+pnpm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| command          | description                |
+| ---------------- | -------------------------- |
+| `pnpm dev`       | start local development    |
+| `pnpm build`     | create a production build  |
+| `pnpm latest`    | install latest deps        |
+| `pnpm ui`        | add shadcn components      |
+| `pnpm db:push`   | apply db schema changes    |
+| `pnpm db:auth`   | update auth-related tables |
+| `pnpm db:studio` | open visual db editor      |
