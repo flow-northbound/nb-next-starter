@@ -52,3 +52,25 @@ pnpm install
 | `pnpm db:push`   | apply db schema changes    |
 | `pnpm db:auth`   | update auth-related tables |
 | `pnpm db:studio` | open visual db editor      |
+
+## Features to add
+
+1. Database integration
+   - [ ] Drizzle ORM
+   - [ ] Neon or Supabase
+2. Authentication
+   - [ ] Better Auth
+   - [ ] Email verification
+   - [ ] Social login
+3. Claude & MCP setup
+   - [ ] CLAUDE.md base file
+   - [ ] MCP setup
+4. Lefthook integration
+   - [ ] Lefthook setup
+5. Trigger.dev integration
+   - [ ] Trigger.dev setup
+6. Tailwind & Shadcn components
+   - [ ] Add shadcn components
+   - [ ] Implement tailwind styles
+
+
