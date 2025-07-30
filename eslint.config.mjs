@@ -1,16 +1,29 @@
-import eslintReact from "@eslint-react/eslint-plugin";
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
 import eslintJs from "@eslint/js";
+import eslintReact from "@eslint-react/eslint-plugin";
 import eslintParserTypeScript from "@typescript-eslint/parser";
-import perfectionist from "eslint-plugin-perfectionist";
-import eslintPluginReadableTailwind from "eslint-plugin-readable-tailwind";
+import eslintPluginReadableTailwind from "eslint-plugin-better-tailwindcss";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+const compat = new FlatCompat({
+  // import.meta.dirname is available after Node.js v20.11.0
+  baseDirectory: import.meta.dirname,
+  recommendedConfig: js.configs.recommended,
+});
+
+const eslintConfig = [
   eslintJs.configs.recommended,
-  tseslint.configs.recommended,
-  tseslint.configs.stylistic,
-  // fatima.eslint.plugin, // import { linter as fatima } from "fatima";
-  { ignores: ["node_modules", ".next"] },
+  ...compat.config({
+    extends: ["next/core-web-vitals"],
+  }),
+  ...(Array.isArray(tseslint.configs.recommended)
+    ? tseslint.configs.recommended
+    : [tseslint.configs.recommended]),
+  ...(Array.isArray(tseslint.configs.stylistic)
+    ? tseslint.configs.stylistic
+    : [tseslint.configs.stylistic]),
+  { ignores: ["node_modules", ".next", "*.config.*"] },
   {
     files: ["**/*.{ts,tsx}"],
     ...eslintReact.configs["recommended-typescript"],
@@ -22,14 +35,13 @@ export default tseslint.config(
       },
     },
   },
-  perfectionist.configs["recommended-natural"],
   {
     files: ["**/*.{ts,tsx}"],
     plugins: {
       "readable-tailwind": eslintPluginReadableTailwind,
     },
     rules: {
-      ...eslintPluginReadableTailwind.configs.warning.rules,
+      ...(eslintPluginReadableTailwind.configs?.warning?.rules || {}),
       "@eslint-react/hooks-extra/no-direct-set-state-in-use-effect": "off",
       "@eslint-react/no-array-index-key": "off",
       "@typescript-eslint/no-explicit-any": "off",
@@ -41,6 +53,7 @@ export default tseslint.config(
         entryPoint: "src/css/globals.css",
       },
     },
-  }
-  // fatima.eslint.noEnvRule("**/*.tsx"),
-);
+  },
+];
+
+export default eslintConfig;

@@ -1,0 +1,32 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm exec biome format --write {staged_files}
+      stage_fixed: true
+
+    - name: tsc
+      run: pnpm exec tsc --noEmit
+
+    - name: eslint
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm exec eslint --cache --fix {staged_files}
+      stage_fixed: true
+
+    - name: biome
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm exec biome check --fix --unsafe {staged_files}
+
+    - name: knip
+      run: echo "Running knip but ignoring output warnings..." | pnpm exec knip --no-exit-code
+
+
+pre-push:
+  parallel: true
